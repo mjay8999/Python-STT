@@ -23,9 +23,9 @@ SAVE_AUDIO = True  # Save recorded audio files
 SAVE_TRANSCRIPTION = True  # Save transcription to text file
 
 # GUI Settings
-WINDOW_TITLE = "Local Speech-to-Text"
-WINDOW_SIZE = "800x600"
-THEME = "default"
+WINDOW_TITLE = "STT Studio — Local Speech-to-Text"
+WINDOW_SIZE = "1120x720"
+THEME = "dark"          # Options: dark, light, system
 
 # Advanced Settings
 BEAM_SIZE = 5  # Higher = more accurate but slower

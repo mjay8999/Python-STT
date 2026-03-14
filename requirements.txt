@@ -1,15 +1,14 @@
 # Core STT dependencies
 openai-whisper
-faster-whisper
 
 # Audio processing
 pyaudio
 sounddevice
-wave
 pydub
+soundfile
 
 # GUI
-tkinter
+customtkinter
 
 # Utilities
 numpy<2.3
