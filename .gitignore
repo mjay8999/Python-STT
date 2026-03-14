@@ -6,6 +6,7 @@ __pycache__/
 .Python
 env/
 venv/
+.venv/
 ENV/
 build/
 dist/
@@ -17,9 +18,13 @@ dist/
 *.m4a
 *.flac
 
-# Transcriptions
+# Runtime output directories
+recordings/
 transcriptions/
 output/
+
+# Runtime settings (persisted by the app)
+settings.json
 
 # Models
 models/
@@ -34,3 +39,8 @@ models/
 # OS
 .DS_Store
 Thumbs.db
+
+# Node
+node_modules/
+react-gui/build/
+react-gui/node_modules/

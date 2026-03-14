@@ -130,10 +130,8 @@ def main():
         print("  Some features may not work properly.")
     
     print("\nYou can now run the application:")
-    print("  GUI: python main.py")
-    print("  CLI: python cli_app.py --help")
-    print("\nOr use the quick launcher:")
-    print("  run_gui.bat")
+    print("  Desktop app: run_desktop_app.bat")
+    print("  Or manually: python main.py")
     print()
 
 
