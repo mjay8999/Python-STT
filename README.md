@@ -4,13 +4,13 @@ A professional offline speech-to-text application using OpenAI's Whisper model.
 
 ## Features
 
-- 🎤 Real-time microphone recording
-- 📁 Process audio files (WAV, MP3, etc.)
-- 🖥️ User-friendly GUI interface
-- ⌨️ Command-line interface (CLI)
-- 🌍 Multiple language support
-- 💾 Save transcriptions to file
-- 🚀 Runs entirely offline/locally
+- Real-time microphone recording
+- Process audio files (WAV, MP3, etc.)
+- User friendly GUI interface
+- Command line interface (CLI)
+- Multiple language support
+- Save transcriptions to file
+- Runs entirely offline/locally
 
 ## Installation
 
