@@ -23,14 +23,17 @@ SAVE_AUDIO = True  # Save recorded audio files
 SAVE_TRANSCRIPTION = True  # Save transcription to text file
 
 # GUI Settings
-WINDOW_TITLE = "Local Speech-to-Text"
-WINDOW_SIZE = "800x600"
-THEME = "default"
+WINDOW_TITLE = "VoiceScribe — AI Transcription"
+WINDOW_SIZE = "1150x740"
+THEME = "dark"  # Options: dark, light
 
 # Advanced Settings
 BEAM_SIZE = 5  # Higher = more accurate but slower
 VAD_FILTER = True  # Voice Activity Detection
 CONDITION_ON_PREVIOUS_TEXT = True  # Use previous text for context
 
+AUTO_TRANSCRIBE = True  # Automatically transcribe after recording completes
+
 # Model Download Settings
 MODEL_CACHE_DIR = None  # None = default cache, or specify custom path
+

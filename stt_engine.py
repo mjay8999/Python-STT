@@ -3,6 +3,7 @@ Speech-to-Text Engine Module
 Handles model loading and transcription using Whisper
 """
 
+import json
 import whisper
 from pathlib import Path
 import config
@@ -224,6 +225,69 @@ class STTEngine:
         secs = int(seconds % 60)
         return f"{minutes:02d}:{secs:02d}"
     
+    def save_as_srt(self, result, filepath):
+        """
+        Save transcription as SRT subtitle file.
+
+        Args:
+            result: Transcription result dictionary
+            filepath: Full path for the output .srt file
+
+        Returns:
+            Path to the saved file
+        """
+        segments = result.get("segments", [])
+        Path(filepath).parent.mkdir(parents=True, exist_ok=True)
+
+        with open(filepath, "w", encoding="utf-8") as f:
+            if segments:
+                for i, seg in enumerate(segments, start=1):
+                    start = self._fmt_srt_time(seg["start"])
+                    end   = self._fmt_srt_time(seg["end"])
+                    f.write(f"{i}\n{start} --> {end}\n{seg['text'].strip()}\n\n")
+            else:
+                # No segments — write the whole text as a single entry
+                text = result.get("text", "").strip()
+                f.write(f"1\n00:00:00,000 --> 00:00:00,000\n{text}\n\n")
+
+        print(f"SRT saved to: {filepath}")
+        return filepath
+
+    def save_as_json(self, result, filepath):
+        """
+        Save transcription as JSON file.
+
+        Args:
+            result: Transcription result dictionary
+            filepath: Full path for the output .json file
+
+        Returns:
+            Path to the saved file
+        """
+        Path(filepath).parent.mkdir(parents=True, exist_ok=True)
+
+        payload = {
+            "language":  result.get("language", "unknown"),
+            "text":      result.get("text", "").strip(),
+            "segments":  result.get("segments", []),
+            "timestamp": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+        }
+
+        with open(filepath, "w", encoding="utf-8") as f:
+            json.dump(payload, f, ensure_ascii=False, indent=2)
+
+        print(f"JSON saved to: {filepath}")
+        return filepath
+
+    @staticmethod
+    def _fmt_srt_time(seconds: float) -> str:
+        """Format seconds to SRT timestamp HH:MM:SS,mmm."""
+        h   = int(seconds // 3600)
+        m   = int((seconds % 3600) // 60)
+        s   = int(seconds % 60)
+        ms  = int((seconds % 1) * 1000)
+        return f"{h:02d}:{m:02d}:{s:02d},{ms:03d}"
+
     def get_available_models(self):
         """Get list of available Whisper models"""
         return ["tiny", "base", "small", "medium", "large"]
