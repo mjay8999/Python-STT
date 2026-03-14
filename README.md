@@ -1,84 +1,98 @@
-# Local Speech-to-Text Software
+# Python Speech-to-Text Desktop Application
 
-A professional offline speech-to-text application using OpenAI's Whisper model.
+🎤 Fully offline speech-to-text desktop app with a modern **Python GUI** (CustomTkinter), global hotkey, VAD auto-stop, and multilingual Whisper transcription.
 
-## Features
+![License](https://img.shields.io/badge/license-MIT-blue.svg)
+![Python](https://img.shields.io/badge/python-3.12+-green.svg)
 
-- 🎤 Real-time microphone recording
-- 📁 Process audio files (WAV, MP3, etc.)
-- 🖥️ User-friendly GUI interface
-- ⌨️ Command-line interface (CLI)
-- 🌍 Multiple language support
-- 💾 Save transcriptions to file
-- 🚀 Runs entirely offline/locally
+## ✨ Features
 
-## Installation
+- ✅ 100% offline after model download
+- ✅ Modern Python desktop GUI (no web frontend)
+- ✅ Whisper model support: tiny/base/small/medium/large
+- ✅ Voice Activity Detection (auto-stop on silence)
+- ✅ Global hotkey dictation (`Ctrl+Shift+Space`)
+- ✅ Audio file transcription (WAV/MP3/M4A/FLAC/OGG)
+- ✅ Config persistence via `settings.json`
+
+## 🚀 Quick Start
 
 ### Prerequisites
-- Python 3.8 or higher
-- FFmpeg (for audio processing)
+- Windows 10/11
+- Python 3.12+
+- FFmpeg in `PATH`
 
-### Windows FFmpeg Installation
-```powershell
-# Using Chocolatey
-choco install ffmpeg
+### Install
 
-# Or download from https://ffmpeg.org/download.html
-```
-
-### Python Dependencies
-```powershell
+```bash
 pip install -r requirements.txt
 ```
 
-## Usage
+### Run
 
-### GUI Mode (Recommended)
-```powershell
+```bash
+run_desktop_app.bat
+```
+
+or:
+
+```bash
 python main.py
 ```
 
-### CLI Mode
-```powershell
-# Record from microphone
-python cli_app.py --mode record --duration 10
+## 📖 Usage
 
-# Transcribe audio file
-python cli_app.py --mode file --input audio.mp3
+1. Open app
+2. In Settings, pick model and click **Load Model**
+3. Click **Start Recording** (or use file transcription)
+4. Speak naturally; VAD stops on silence
+5. Read/copy result from the transcription panel
 
-# Specify model size (tiny, base, small, medium, large)
-python cli_app.py --mode record --model base --duration 5
+### Global Hotkey
+
+1. Load model
+2. Enable **Global Hotkey** in Settings
+3. Press `Ctrl+Shift+Space` anywhere
+4. Transcribed text is copied/pasted based on settings
+
+## 🌍 Languages
+
+- Auto-detect
+- en, hi, es, fr, de, it, pt, ru, ja, zh
+
+## 🏗️ Architecture (Python-only)
+
+```
+┌─────────────────────────────────────────┐
+│      Python Desktop GUI (CustomTkinter) │
+│  ┌───────────────────────────────────┐  │
+│  │  Recording / Settings / History   │  │
+│  └─────────────┬─────────────────────┘  │
+│                │                         │
+│  ┌─────────────▼─────────────────────┐  │
+│  │        Service Layer               │  │
+│  │      (gui/services/stt_service.py) │  │
+│  └──────┬───────────────┬────────────┘  │
+└─────────┼───────────────┼───────────────┘
+          │               │
+   ┌──────▼──────┐   ┌────▼───────────┐
+   │ audio_handler│   │ hotkey_handler │
+   └──────┬──────┘   └────┬───────────┘
+          │               │
+          └──────┬────────┘
+                 ▼
+             stt_engine
+            (Whisper AI)
 ```
 
-## Model Sizes
+## ⚙️ Configuration
 
-| Model  | Parameters | VRAM    | Speed      | Accuracy |
-|--------|-----------|---------|------------|----------|
-| tiny   | 39 M      | ~1 GB   | Very Fast  | Good     |
-| base   | 74 M      | ~1 GB   | Fast       | Better   |
-| small  | 244 M     | ~2 GB   | Moderate   | Great    |
-| medium | 769 M     | ~5 GB   | Slow       | Excellent|
-| large  | 1550 M    | ~10 GB  | Very Slow  | Best     |
+Tune defaults in `config.py` or through the GUI settings panel:
+- model/language/duration
+- save audio/transcription
+- VAD behavior
+- hotkey auto-paste behavior
 
-## Configuration
+## 📝 License
 
-Edit `config.py` to customize:
-- Default model size
-- Audio quality settings
-- Output directory
-- Language preferences
-
-## Troubleshooting
-
-**PyAudio Installation Issues:**
-```powershell
-pip install pipwin
-pipwin install pyaudio
-```
-
-**CUDA/GPU Support:**
-- Install PyTorch with CUDA: https://pytorch.org/get-started/locally/
-
-## License
-
-MIT License - Free to use and modify
+MIT

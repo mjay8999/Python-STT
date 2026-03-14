@@ -1,0 +1,41 @@
+PYTHON STT - QUICK REFERENCE
+============================
+
+START
+-----
+1) run_desktop_app.bat
+2) Load Model (Settings)
+3) Start Recording
+
+MAIN CONTROLS
+-------------
+- Start Recording: mic capture + VAD auto-stop
+- Stop: requests early stop
+- Transcribe File: choose WAV/MP3/M4A/FLAC/OGG
+
+HOTKEY
+------
+- Toggle in Settings
+- Default: Ctrl+Shift+Space
+- Requires model loaded
+
+SETTINGS
+--------
+- Model: tiny/base/small/medium/large
+- Language: auto/en/hi/es/fr/de/it/pt/ru/ja/zh
+- Duration: 5..60 seconds
+- Silence stop: 0.5..5.0 seconds
+- Save audio/transcription
+- Auto paste
+
+OUTPUTS
+-------
+- recordings/         (optional WAV files)
+- transcriptions/     (optional text files)
+- settings.json       (saved preferences)
+
+TROUBLESHOOTING
+---------------
+- No transcription: load model first
+- Hotkey inactive: run as admin, then re-enable hotkey
+- Mic problems: check Windows mic privacy permissions
