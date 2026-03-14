@@ -3,7 +3,6 @@ Voice Activity Detection Module
 Detects when user stops speaking to automatically end recording
 """
 
-import webrtcvad
 import numpy as np
 import collections
 
@@ -20,6 +19,7 @@ class VoiceActivityDetector:
             frame_duration_ms: Duration of each frame in ms (10, 20, or 30)
             aggressiveness: VAD aggressiveness (0-3, higher = more aggressive filtering)
         """
+        import webrtcvad
         self.sample_rate = sample_rate
         self.frame_duration_ms = frame_duration_ms
         self.frame_size = int(sample_rate * frame_duration_ms / 1000)

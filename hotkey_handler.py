@@ -3,7 +3,6 @@ Hotkey Listener Module
 Handles global keyboard shortcuts for triggering STT
 """
 
-import keyboard
 import threading
 from typing import Callable, Optional
 
@@ -52,6 +51,7 @@ class HotkeyListener:
     
     def start(self):
         """Start listening for hotkey"""
+        import keyboard
         if self.is_listening:
             print("Hotkey listener already running")
             return
@@ -66,6 +66,7 @@ class HotkeyListener:
     
     def stop(self):
         """Stop listening for hotkey"""
+        import keyboard
         if not self.is_listening:
             return
         
@@ -78,6 +79,7 @@ class HotkeyListener:
     
     def wait(self):
         """Block until listener is stopped"""
+        import keyboard
         try:
             keyboard.wait()
         except KeyboardInterrupt:
@@ -134,6 +136,7 @@ class ClipboardManager:
         Returns:
             Boolean indicating success
         """
+        import keyboard
         import pyperclip
         import time
         

@@ -3,13 +3,11 @@ Speech-to-Text Engine Module
 Handles model loading and transcription using Whisper
 """
 
-import whisper
 from pathlib import Path
 import config
 import os
 from datetime import datetime
 import numpy as np
-import torch
 
 
 class STTEngine:
@@ -31,6 +29,9 @@ class STTEngine:
 
     def load_model(self):
         """Load the Whisper model"""
+        import whisper
+        import torch
+
         if self.model is not None:
             print("Model already loaded")
             return
@@ -220,6 +221,7 @@ class STTEngine:
 
     def unload_model(self):
         """Unload model to free memory"""
+        import torch
         if self.model is not None:
             del self.model
             self.model = None

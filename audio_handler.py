@@ -5,7 +5,6 @@ Handles microphone recording and audio file processing
 
 import wave
 import time
-import sounddevice as sd
 import numpy as np
 from pathlib import Path
 from datetime import datetime
@@ -45,6 +44,7 @@ class AudioHandler:
         Returns:
             numpy array of audio data
         """
+        import sounddevice as sd
         print(f"Recording for {duration} seconds...")
 
         audio_data = sd.rec(
@@ -125,6 +125,7 @@ class AudioHandler:
         Returns:
             List of device information
         """
+        import sounddevice as sd
         devices = sd.query_devices()
         input_devices = []
 
@@ -146,6 +147,7 @@ class AudioHandler:
         Args:
             device_id: Device ID to use
         """
+        import sounddevice as sd
         sd.default.device = device_id
         print(f"Set input device to: {sd.query_devices(device_id)['name']}")
 
@@ -163,6 +165,7 @@ class AudioHandler:
         Returns:
             numpy array of audio data (may be empty if nothing was captured)
         """
+        import sounddevice as sd
         from vad import VoiceActivityDetector, SilenceDetector
 
         print(f"Recording with voice activity detection...")
