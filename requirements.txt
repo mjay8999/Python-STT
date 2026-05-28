@@ -9,7 +9,7 @@ wave
 pydub
 
 # GUI
-tkinter
+customtkinter>=5.2.0
 
 # Utilities
 numpy<2.3
