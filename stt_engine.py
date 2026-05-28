@@ -3,12 +3,10 @@ Speech-to-Text Engine Module
 Handles model loading and transcription using Whisper
 """
 
-import whisper
 from pathlib import Path
 import config
 import os
 from datetime import datetime
-import torch
 
 
 class STTEngine:
@@ -40,6 +38,9 @@ class STTEngine:
         print("This may take a few minutes on first run (downloading model)...")
         
         try:
+            import torch
+            import whisper
+
             # Determine device
             if self.device == "auto":
                 device = "cuda" if torch.cuda.is_available() else "cpu"
@@ -231,7 +232,10 @@ class STTEngine:
     def unload_model(self):
         """Unload model to free memory"""
         if self.model is not None:
+            import sys
+            torch = sys.modules.get('torch')
             del self.model
             self.model = None
-            torch.cuda.empty_cache() if torch.cuda.is_available() else None
+            if torch is not None and torch.cuda.is_available():
+                torch.cuda.empty_cache()
             print("Model unloaded")
